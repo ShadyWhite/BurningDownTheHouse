@@ -4,14 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BurningDownTheHouse"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="Burning Down the House" Height="300" Width="300">
+        Title="Burning Down the House" Height="200" Width="300">
     <Window.InputBindings>
         <KeyBinding Command="{Binding ActiveCommand}" Key="Home" />
     </Window.InputBindings>
     <Grid>
-        <CheckBox Content="Place Anywhere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsChecked="{Binding PlaceAnywhere}" Content="Place Anywhere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Checked">
+                    <i:InvokeCommandAction Command="{Binding PACheckedCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Unchecked">
+                    <i:InvokeCommandAction Command="{Binding PACheckedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </CheckBox>
     </Grid>
 </Window>
