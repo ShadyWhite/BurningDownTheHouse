@@ -5,23 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BurningDownTheHouse"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="Burning Down the House" Height="200" Width="300">
+        Title="Burning Down the House" Height="285" Width="300" ResizeMode="NoResize" SizeToContent="Height">
     <Window.InputBindings>
         <KeyBinding Command="{Binding ActiveCommand}" Key="Home" />
     </Window.InputBindings>
-    <Grid>
-        <CheckBox IsChecked="{Binding PlaceAnywhere}" Content="Place Anywhere" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Checked">
-                    <i:InvokeCommandAction Command="{Binding PACheckedCommand}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="Unchecked">
-                    <i:InvokeCommandAction Command="{Binding PACheckedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </CheckBox>
-    </Grid>
+    <StackPanel>
+        <GroupBox Header="Settings" Height="90" Margin="10">
+            <StackPanel>
+                <CheckBox IsChecked="{Binding PlaceAnywhere}" Content="Place Anywhere" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <prism:InvokeCommandAction Command="{Binding PACheckedCommand}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <prism:InvokeCommandAction Command="{Binding PACheckedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+                <StackPanel Orientation="Horizontal" Margin="10,2">
+                    <Label Content="Keybind" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ShotcutText}" VerticalAlignment="Top" Width="120">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewKeyDown">
+                                <prism:InvokeCommandAction Command="{Binding ShortcutPreviewCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Active Position" Height="100" Margin="10,0,10,10">
+            <StackPanel>
+                <xctk:IntegerUpDown Margin="10" />
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
 </Window>

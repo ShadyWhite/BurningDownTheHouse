@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace BurningDownTheHouse.ViewModels
@@ -21,7 +22,8 @@ namespace BurningDownTheHouse.ViewModels
 		private ulong FFXIV_DX11 { get; set; }
 		public bool PlaceAnywhere { get; set; }
 
-		public DelegateCommand PACheckedCommand { get; private set; }
+		public ICommand PACheckedCommand { get; private set; }
+		public ICommand ShortcutPreviewCommand { get; private set; }
 
 		/// <summary>
 		/// Constructor.
@@ -39,6 +41,7 @@ namespace BurningDownTheHouse.ViewModels
 
 			// Create commands.
 			PACheckedCommand = new DelegateCommand(OnPlaceAnywhereChecked);
+			ShortcutPreviewCommand = new DelegateCommand<KeyEventArgs>(OnPreviewShortcutKey);
 		}
 
 		/// <summary>
@@ -101,6 +104,11 @@ namespace BurningDownTheHouse.ViewModels
 				EnablePlaceAnywhere();
 			else
 				DisablePlaceAnywhere();
+		}
+
+		private void OnPreviewShortcutKey(KeyEventArgs args)
+		{
+			Console.WriteLine(args.SystemKey);
 		}
 
 		/// <summary>
