@@ -1,4 +1,5 @@
-using BurningDownTheHouse.Models;
+﻿using BurningDownTheHouse.Models;
+using Gma.System.MouseKeyHook;
 using Nhaama.Memory;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -25,6 +26,8 @@ namespace BurningDownTheHouse.ViewModels
 		public ICommand PACheckedCommand { get; private set; }
 		public ICommand ShortcutPreviewCommand { get; private set; }
 
+		private IKeyboardMouseEvents GlobalHook;
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -42,6 +45,28 @@ namespace BurningDownTheHouse.ViewModels
 			// Create commands.
 			PACheckedCommand = new DelegateCommand(OnPlaceAnywhereChecked);
 			ShortcutPreviewCommand = new DelegateCommand<KeyEventArgs>(OnPreviewShortcutKey);
+
+			// Subscribe to key events.
+			Subscribe();
+		}
+
+		private void Subscribe()
+		{
+			// Hook for mouse and keyboard events.
+			GlobalHook = Hook.GlobalEvents();
+
+			GlobalHook.MouseDownExt += GlobalHook_MouseDownExt;
+			GlobalHook.KeyPress += GlobalHook_KeyPress;
+		}
+
+		private void GlobalHook_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+		{
+			Console.WriteLine(e.KeyChar);
+		}
+
+		private void GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
+		{
+			Console.WriteLine(e.Button);
 		}
 
 		/// <summary>
