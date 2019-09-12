@@ -1,4 +1,4 @@
-﻿using BurningDownTheHouse.Models;
+using BurningDownTheHouse.Models;
 using Nhaama.Memory;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -64,8 +64,15 @@ namespace BurningDownTheHouse.ViewModels
 					var offsetXml = client.DownloadString(uri);
 					Offset = (Offsets)serializer.Deserialize(new StringReader(offsetXml));
 				}
-				catch (WebException ex)
+				catch (Exception ex)
 				{
+					MessageBox.Show(
+						"Could not find offsets for the latest version, please check again later or bug me on Discord!", 
+						"Burning Down the House", 
+						MessageBoxButton.OK, 
+						MessageBoxImage.Error
+					);
+
 					throw new Exception("Couldn't not get the offsets for version: " + uri, ex);
 				}
 			}
