@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nhaama.FFXIV", "..\Nhaama\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nhaama.Memory", "..\Nhaama\Nhaama.Memory\Nhaama.Memory.csproj", "{933935A7-8D04-42E8-AEE5-122B3AEED820}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Offsets", "Offsets", "{E05532B3-15D0-4968-90E9-19A4A5941C25}"
-	ProjectSection(SolutionItems) = preProject
-		Offsets\2019.07.24.0001.0000.xml = Offsets\2019.07.24.0001.0000.xml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
