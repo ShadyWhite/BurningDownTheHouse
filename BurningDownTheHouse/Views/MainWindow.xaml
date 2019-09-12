@@ -40,7 +40,7 @@
         </GroupBox>
         <GroupBox Header="Active Position" Height="100" Margin="10,0,10,10">
             <StackPanel>
-                <xctk:IntegerUpDown Margin="10" />
+                
             </StackPanel>
         </GroupBox>
     </StackPanel>
